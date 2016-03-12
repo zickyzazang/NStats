@@ -39,14 +39,17 @@ def StatLOO(function, items, name, *kwargs):
 
 
 def CronbachsAlpha(items):
+    items = ConverttoPandas(items)
     return k_by_k(items)*(1-(item_var_sum(items)/total_var(items)))
 
 
 def CalphaItemdeleted(items):
+    items = ConverttoPandas(items)
     return StatLOO(CronbachsAlpha, items, 'Alpha if Item Deleted')
 
 
 def ItemTotalCorrelation(items):
+    items = ConverttoPandas(items)
     stat_without_item = pd.Series(index=items.columns, name='Item Total Correlation')
     for item in items.columns:
         total_deitemed = total_score(items) - items[item]
@@ -80,6 +83,7 @@ class Reliability:
         self.return_results()
     
     def ItemReduction(self, items):
+        items = ConverttoPandas(items)
         cids = CalphaItemdeleted(items)
         calpha = CronbachsAlpha(items)
         self.dropped_items = []
