@@ -76,6 +76,16 @@ class Reliability:
         print return_template.format(Calpha=self.Calpha, iteminfo=self.iteminfo)
     
     def analyse(self, items):
+        
+        '''Calculates Cronbach's alpha, Item total correlation and alpha if item deleted.
+        
+        Parameters
+        ----------
+        items : pandas dataframe or numpy array
+            assumes sunjeects in rows and items in columns
+            
+        '''
+        
         self.Calpha = CronbachsAlpha(items)
         self.CalphaItemdeleted = CalphaItemdeleted(items)
         self.ITC = ItemTotalCorrelation(items)
@@ -83,6 +93,16 @@ class Reliability:
         self.return_results()
     
     def ItemReduction(self, items):
+        
+        '''Iteratively remove items if that improves Cronbach's alpha. Stops when no improvement made.
+        Stores new set of items in the "new_items" object.
+        
+        Parameters
+        ----------
+        items : pandas dataframe or numpy array
+            assumes sunjeects in rows and items in columns
+            
+        '''
         items = ConverttoPandas(items)
         cids = CalphaItemdeleted(items)
         calpha = CronbachsAlpha(items)
