@@ -29,12 +29,6 @@ def ConverttoPandas(items):
         print 'unkown data container'
         return None
 
-    
-def FlagMissing(items):
-    if items.isnull().any().any():
-        print "NaN's found. Results may not be accurate"
-    return items
-
 
 def StatLOO(function, items, name, *kwargs):
     stat_without_item = pd.Series(index=items.columns, name=name)
