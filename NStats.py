@@ -22,7 +22,7 @@ def k_by_k(items):
 
 def ConverttoPandas(items):
     if type(items) == np.ndarray:
-        return pd.DataFrame(data)
+        return pd.DataFrame(items)
     elif type(items) == pd.DataFrame:
         return items
     else:
