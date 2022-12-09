@@ -26,7 +26,7 @@ def ConverttoPandas(items):
     elif type(items) == pd.DataFrame:
         return items
     else:
-        print 'unkown data container'
+        print('unkown data container')
         return None
 
 
@@ -34,7 +34,7 @@ def StatLOO(function, items, name, *kwargs):
     stat_without_item = pd.Series(index=items.columns, name=name)
     for item in items.columns:
         calc_stat_on = items.drop(item, axis=1)
-        stat_without_item.ix[item] = function(calc_stat_on, *kwargs)
+        stat_without_item.loc[item] = function(calc_stat_on, *kwargs)
     return stat_without_item
 
 
@@ -53,7 +53,7 @@ def ItemTotalCorrelation(items):
     stat_without_item = pd.Series(index=items.columns, name='Item Total Correlation')
     for item in items.columns:
         total_deitemed = total_score(items) - items[item]
-        stat_without_item.ix[item] = items[item].corr(total_deitemed)
+        stat_without_item.loc[item] = items[item].corr(total_deitemed)
     return stat_without_item
 
 return_template = """
@@ -114,9 +114,9 @@ class Reliability:
             cids = CalphaItemdeleted(self.new_items)
             calpha = CronbachsAlpha(self.new_items)
         # Maybe a new analyses object
-        print """\n
+        print("""\n
 ---------------------------
 Results after itemreduction
----------------------------"""
+---------------------------""")
         self.analyse(self.new_items)
         
